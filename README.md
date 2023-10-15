@@ -2,4 +2,4 @@
 
 -----------------
 
-# Sonification of Scientific Data in Python
+# Turning Scientific Data into Sounds & Music
