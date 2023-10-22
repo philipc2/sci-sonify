@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scisonify"
+authors = [
+    {name = "Philip Chmielowiec", email = "philipc@ucar.edu"},
+]
+description = "My package description"
+readme = "README.md"
+requires-python = ">=3.7"
+dynamic = ["version"]
