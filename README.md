@@ -6,6 +6,8 @@
 
 ## What is it?
 
+Sci-Sonify is a Python package that enables simple and straightforward data sonification (turning data into sounds). It converts data represented using common packages from the Scientiffic Python Ecosystem such as Numpy, Pandas, and Xarray into sounds and music. 
+
 ## Documentation
 
 ## Installation
