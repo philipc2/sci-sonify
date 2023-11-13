@@ -81,29 +81,23 @@ jobs:
             python=${{matrix.python-version}}
             conda
 
-      # We only want to install this on one run, because otherwise we'll have
-      # duplicate annotations.
-      - name: Install error reporter
-        if: ${{ matrix.os }} == 'ubuntu-latest' and ${{ matrix.python-version }} == '3.10'
-        run: |
-          python -m pip install pytest-github-actions-annotate-failures
-
       - name: Install SciSonify
         run: |
-          python -m pip install --no-deps -e .
+          python -m pip install . --no-deps
 
-      - name: Version info
+      - name: conda list
         run: |
-          conda info -a
           conda list
 
-      - name: Import SciSonify
+      - name: Run Coverage Tests
         run: |
-          python -c "import scisonify"
+          python -m pytest
 
-      - name: Run tests
-        run: python -m pytest -n 4
-          --timeout 180
-          --cov-report=xml
-          --junitxml=pytest.xml
-          $PYTEST_EXTRA_FLAGS
+      - name: Upload code coverage to Codecov
+        uses: codecov/codecov-action@v3.1.4
+        with:
+          file: ./coverage.xml
+          flags: unittests
+          env_vars: OS,PYTHON
+          name: codecov-umbrella
+          fail_ci_if_error: false
