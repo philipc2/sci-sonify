@@ -3,11 +3,27 @@ requires = ["setuptools", "setuptools-scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "scisonify"
 authors = [
-    {name = "Philip Chmielowiec", email = "philipc@ucar.edu"},
+  {name = "Philip Chmielowiec", email = "philipc@ucar.edu"},
 ]
-description = "My package description"
-readme = "README.md"
-requires-python = ">=3.7"
+classifiers = [
+  "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering",
+]
+description = "Sonification of Scientific Data in Python"
 dynamic = ["version"]
+name = "scisonify"
+readme = "README.md"
+requires-python = ">=3.9"
+
+dependencies = [
+  "scipy",
+  "librosa",
+  "ipython",
+]
