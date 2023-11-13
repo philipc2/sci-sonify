@@ -13,29 +13,31 @@ class DiscreteNoteBins:
     # todo, make inherit from SoundMap
 
     def __init__(self, notes):
-
         self._notes = notes
         self._bins = self._construct_bins(len(notes))
 
     @classmethod
-    def from_key(cls, key = "C:maj", octave_range = (4, 4)):
+    def from_key(cls, key="C:maj", octave_range=(4, 4)):
         key_notes = librosa.key_to_notes(key)
 
         notes = []
         for i in range(octave_range[0], octave_range[1] + 1):
             notes.extend([note + str(i) for note in key_notes])
 
-        return cls(notes)
+        notes = np.array(notes)
+        freqs = np.array([librosa.note_to_hz(note) for note in notes])
+
+        ordered_indices = freqs.argsort()
+
+        return cls(notes[ordered_indices])
 
     def get_frequency(self, value):
         note = self.get_note(value)
         return librosa.note_to_hz(note)
 
     def get_note(self, value):
-        note_idx = np.searchsorted(self._bins, value, side='left') - 1
+        note_idx = np.searchsorted(self._bins, value, side="left") - 1
         return self._notes[note_idx]
-
-
 
     def _construct_bins(self, n_notes):
         """Constructs a discrete set of bins, which map normalized data values to musical notes.
@@ -46,4 +48,8 @@ class DiscreteNoteBins:
            A         B          C
 
         """
-        return np.linspace(0, 1, n_notes + 1)
+        bins = np.linspace(0, 1, n_notes + 1)
+        bins[0] -= 0.0001
+        bins[-1] += 0.001
+
+        return bins
