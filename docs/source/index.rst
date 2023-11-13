@@ -11,6 +11,20 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 1
+   :caption: Overview
 
-   usage
-   api
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Overview
+
+   install.rst
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: API
+
+   user_api
+   internal_api
