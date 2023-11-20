@@ -18,6 +18,7 @@ class DiscreteNoteBins:
 
     @classmethod
     def from_key(cls, key="C:maj", octave_range=(4, 4)):
+        """TODO"""
         key_notes = librosa.key_to_notes(key)
 
         notes = []
@@ -30,6 +31,26 @@ class DiscreteNoteBins:
         ordered_indices = freqs.argsort()
 
         return cls(notes[ordered_indices])
+
+    @classmethod
+    def from_midi(cls, start_note, end_note):
+        """TODO"""
+        # ensure end_node > start_note
+
+        note_range = np.arange(start_note, end_note + 1)
+
+        notes = [librosa.midi_to_note(note) for note in note_range]
+
+        return cls(notes)
+
+    @classmethod
+    def from_notes(cls, start_note, end_note):
+        """TODO"""
+
+        start_note_midi = librosa.note_to_midi(start_note)
+        end_note_midi = librosa.note_to_midi(end_note)
+
+        return cls.from_midi(start_note_midi, end_note_midi)
 
     def get_frequency(self, value):
         note = self.get_note(value)
