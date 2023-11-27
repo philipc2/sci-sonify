@@ -70,7 +70,7 @@ class DiscreteNoteBins:
 
         """
         bins = np.linspace(0, 1, n_notes + 1)
-        bins[0] -= 0.0001
+        bins[0] -= 0.001
         bins[-1] += 0.001
 
         return bins
