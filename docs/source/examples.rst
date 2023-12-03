@@ -8,4 +8,4 @@ TODO
    :maxdepth: 1
    :hidden:
 
-   scisonify/examples/template.ipynb
+   examples/template.ipynb
