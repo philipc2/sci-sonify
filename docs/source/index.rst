@@ -28,3 +28,9 @@ Contents
 
    user_api
    internal_api
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Examples
+
+   examples
