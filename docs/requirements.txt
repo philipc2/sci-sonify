@@ -12,3 +12,4 @@ os
 sys
 pathlib
 pip
+git+https://github.com/philipc2/sci-sonify.git
