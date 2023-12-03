@@ -30,7 +30,7 @@ Contents
    internal_api
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: Examples
 
-   examples/template
+   examples/template.ipynb
