@@ -1,3 +1,6 @@
 sphinx
 sphinx-rtd-theme
 nbsphinx
+ipykernel
+ipython
+jupyter_client
