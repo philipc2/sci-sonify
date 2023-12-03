@@ -5,7 +5,6 @@ TODO
 
 
 .. toctree::
-   :maxdepth: 1
-   :hidden:
+   :maxdepth: 2
 
-   examples/template.ipynb
+   examples/template
