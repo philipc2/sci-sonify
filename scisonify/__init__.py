@@ -1,4 +1,7 @@
-from scisonify.core.sonify import Sonify
+from scisonify.core.sonify import Sonify, SonifyAccessor
 
 
-__all__ = ("Sonify",)
+__all__ = (
+    "Sonify",
+    "SonifyAccessor",
+)

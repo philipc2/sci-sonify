@@ -73,3 +73,17 @@ class Sonify:
         """TODO: Docstring"""
         waveform = self.to_waveform(wave, note_length)
         return Audio(waveform, rate=self.fs)
+
+
+class SonifyAccessor:
+    def __init__(self, obj):
+        self._obj = obj
+
+    def __call__(
+        self, note_length=1.0, wave="sine", smap=None, envelope=None, fs=44100
+    ):
+        pass
+
+    def _construct_sonify(self, smap, envelope, fs):
+        # todo
+        pass
