@@ -4,3 +4,7 @@ nbsphinx
 ipykernel
 ipython
 jupyter_client
+numpy
+xarray
+librosa
+scipy
