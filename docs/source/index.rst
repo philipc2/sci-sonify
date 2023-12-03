@@ -33,4 +33,4 @@ Contents
    :maxdepth: 2
    :caption: Examples
 
-   examples/template.ipynb
+   examples/01-climate-change.ipynb
