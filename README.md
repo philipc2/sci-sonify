@@ -14,7 +14,29 @@ Instead of using colors (i.e. colormaps) for visualuzing data, Sci-Sonify introd
 TODO: add a visual comparing "colormaps" to "soundmaps"
 
 ## Accessors
-TODO: describe the xarray, pandas, accessors to enable sonification
+In addition to providing standalone functionality for working with lists and arrays, Sci-Sonify introduces accessors into commonly used packages in the Scientific Python Ecosystem.
+
+### Xarray
+Sonification through a `xr.DataArray`
+```Python
+import xarray as xr
+import scisonify.xarray
+
+da = xr.DataArray([1, 2, 3])
+
+da.sonify()
+```
+
+### Pandas
+Sonification through a `pd.Series`
+```Python
+import pandas as pd
+import scisonify.pandas
+
+s = pd.Series([1, 2, 3])
+
+s.sonify()
+```
 
 
 ## Documentation
