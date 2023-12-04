@@ -1,4 +1,4 @@
-SoundMaps
+Sound Maps
 =========
 
 .. note::

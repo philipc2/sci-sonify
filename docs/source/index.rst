@@ -26,7 +26,7 @@ Contents
    sonification.rst
    soundmaps.rst
    sonify.rst
-
+   accessors.rst
 
 
 
