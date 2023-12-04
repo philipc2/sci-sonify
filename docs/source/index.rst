@@ -34,3 +34,4 @@ Contents
    :caption: Examples
 
    examples/01-climate-change.ipynb
+   examples/02-exoplanet-transit.ipynb
