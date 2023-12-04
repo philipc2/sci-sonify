@@ -1,15 +1,23 @@
 import numpy as np
 
+from typing import Optional
+
 from IPython.display import Audio
 
 from .waveforms import sine_wave, square_wave, sawtooth_wave
-from .soundmaps import DiscreteNoteBins
+from .soundmaps import SoundMap, DiscreteNoteBins
 
 from .envelope import EnvelopeADSR
 
 
 class Sonify:
-    def __init__(self, data, smap=None, envelope=None, fs=44100):
+    def __init__(
+        self,
+        data: np.ndarray,
+        smap: Optional[SoundMap] = None,
+        envelope: Optional[EnvelopeADSR] = None,
+        fs: Optional[int] = 44100,
+    ):
         # add check for data, must be 1D
         self._data = self._normalize_data(data)
         self.n_notes = len(data)
@@ -80,10 +88,18 @@ class SonifyAccessor:
         self._obj = obj
 
     def __call__(
-        self, note_length=1.0, wave="sine", smap=None, envelope=None, fs=44100
+        self, wave="sine", note_length=1.0, smap=None, envelope=None, fs=44100
     ):
-        pass
+        sonify = self._construct_sonify_obj(smap, envelope, fs)
+        return sonify.to_audio(wave, note_length)
 
-    def _construct_sonify(self, smap, envelope, fs):
-        # todo
-        pass
+    def _construct_sonify_obj(self, smap, envelope, fs):
+        """TODO:"""
+
+        if self._obj.ndim > 1:
+            raise ValueError("TODO")
+
+        data = self._obj.values
+
+        sonify = Sonify(data=data, smap=smap, envelope=envelope, fs=fs)
+        return sonify

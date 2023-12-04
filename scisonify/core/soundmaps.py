@@ -1,15 +1,12 @@
-# todo
-
 import numpy as np
 import librosa
 
 
 class SoundMap:
-    # define what every "soundmap" should have
     pass
 
 
-class DiscreteNoteBins:
+class DiscreteNoteBins(SoundMap):
     # todo, make inherit from SoundMap
 
     def __init__(self, notes):
