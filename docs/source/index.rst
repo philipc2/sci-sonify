@@ -30,7 +30,7 @@ Contents
    internal_api
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Examples
 
    examples/01-climate-change.ipynb
