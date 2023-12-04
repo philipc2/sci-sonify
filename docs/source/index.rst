@@ -1,7 +1,7 @@
-Title: TODO
-===================================
+Sci-Sonify
+==========
 
-TODO:
+Turning Scientific Data into Sounds & Music
 
 .. note::
 
@@ -10,16 +10,24 @@ TODO:
 Contents
 --------
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Overview
-
 
 .. toctree::
    :maxdepth: 1
-   :caption: Overview
+   :caption: Getting Started
 
+
+   overview.rst
    install.rst
+
+.. toctree::
+   :maxdepth: 1
+   :caption: User Guide
+
+   sonification.rst
+   soundmaps.rst
+   sonify.rst
+
+
 
 
 .. toctree::
