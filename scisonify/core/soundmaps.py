@@ -16,7 +16,7 @@ class DiscreteNoteBins(SoundMap):
     @classmethod
     def from_key(cls, key="C:maj", octave_range=(4, 4)):
         """TODO"""
-        key_notes = librosa.key_to_notes(key)
+        key_notes = librosa.key_to_notes(key, unicode=False)
 
         notes = []
         for i in range(octave_range[0], octave_range[1] + 1):
@@ -36,9 +36,14 @@ class DiscreteNoteBins(SoundMap):
 
         note_range = np.arange(start_note, end_note + 1)
 
-        notes = [librosa.midi_to_note(note) for note in note_range]
+        notes = [librosa.midi_to_note(note, unicode=False) for note in note_range]
 
-        return cls(notes)
+        notes = np.array(notes)
+        freqs = np.array([librosa.note_to_hz(note) for note in notes])
+
+        ordered_indices = freqs.argsort()
+
+        return cls(notes[ordered_indices])
 
     @classmethod
     def from_notes(cls, start_note, end_note):
@@ -56,6 +61,15 @@ class DiscreteNoteBins(SoundMap):
     def get_note(self, value):
         note_idx = np.searchsorted(self._bins, value, side="left") - 1
         return self._notes[note_idx]
+
+    @property
+    def notes(self):
+        """TODO:"""
+        return self._notes
+
+    @property
+    def frequencies(self):
+        return [librosa.note_to_hz(note) for note in self.notes]
 
     def _construct_bins(self, n_notes):
         """Constructs a discrete set of bins, which map normalized data values to musical notes.

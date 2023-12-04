@@ -11,6 +11,24 @@ from .envelope import EnvelopeADSR
 
 
 class Sonify:
+    """Class for performing Data Sonification.
+
+    Turns a 1-dimensions array-like data variable into musical notes.
+
+    Parameters
+    ----------
+
+    data: array-like
+        todo
+    smap: SoundMap, optional
+        todo
+    envelope: EnvelopeADSR, optional
+        todo
+    fs: int, optional
+        todo
+
+    """
+
     def __init__(
         self,
         data: np.ndarray,
@@ -18,7 +36,6 @@ class Sonify:
         envelope: Optional[EnvelopeADSR] = None,
         fs: Optional[int] = 44100,
     ):
-        # add check for data, must be 1D
         self._data = self._normalize_data(data)
         self.n_notes = len(data)
         self.fs = fs
@@ -34,15 +51,23 @@ class Sonify:
             self.smap = smap
 
     def _normalize_data(self, data):
-        """TODO: Docstring"""
+        """Normalizes a one-dimensional array-like data variable into the range [0, 1]"""
         data = np.asarray(data)
+        if data.ndim > 1:
+            raise ValueError(
+                f"Expected data with 1 dimension, but received {data.ndim} dimensions."
+            )
 
-        return (data - data.min(axis=0)) / (data.max(axis=0) - data.min(axis=0))
+        if np.all(np.isclose(data, data[0])):
+            # uniform data maps to all ones to avoid floating point division
+            data_norm = np.ones_like(data)
+        else:
+            # normalize data to [0, 1]
+            data_norm = (data - data.min(axis=0)) / (
+                data.max(axis=0) - data.min(axis=0)
+            )
 
-    def to_frequency(self):
-        """Converts each data point into a frequency using a SoundMap"""
-        freqs = [self.smap.get_frequency(val) for val in self._data]
-        return freqs
+        return data_norm
 
     def to_waveform(self, wave="sine", note_length=1.0):
         if wave == "sine":
@@ -58,11 +83,12 @@ class Sonify:
         waveform = np.empty(int(note_length * self.fs) * len(self._data))
 
         # obtain the frequency (note) of each data point
-        freqs = self.to_frequency()
+        freqs = self.to_frequencies()
 
         # number of samples per data point
         n_samples = int(note_length * self.fs)
 
+        # obtain the amplitudes to use when applying envelope to each note
         envelope_amplitudes = self.envelope.get_amplitudes(np.linspace(0, 1, n_samples))
 
         for i, freq in enumerate(freqs):
@@ -78,28 +104,84 @@ class Sonify:
         return waveform
 
     def to_audio(self, wave="sine", note_length=1.0):
-        """TODO: Docstring"""
+        """Returns an interactive Audio object for use in Notebooks"""
         waveform = self.to_waveform(wave, note_length)
         return Audio(waveform, rate=self.fs)
 
+    def to_notes(self):
+        """TODO:"""
+        return [self.smap.get_note(val) for val in self._data]
+
+    def to_frequencies(self):
+        """Converts each data point into a frequency using a SoundMap"""
+        freqs = [self.smap.get_frequency(val) for val in self._data]
+        return freqs
+
+    def plot(
+        self,
+        x=None,
+        xlabel=None,
+        title=None,
+        figsize=(10, 5),
+        marker="o",
+        linewidth=0,
+        **kwargs,
+    ):
+        import matplotlib.pyplot as plt
+
+        plt.figure(figsize=figsize)
+
+        if x is None:
+            x = range(len(self._data))
+
+        note_values = np.linspace(0, 1, len(self.smap.notes))
+        order_notes = {note: val for note, val in zip(self.smap.notes, note_values)}
+
+        notes_ordered = [order_notes[note] for note in self.to_notes()]
+
+        plt.plot(x, notes_ordered, marker=marker, linewidth=linewidth, **kwargs)
+        plt.yticks(note_values, self.smap.notes)
+        plt.ylabel("Note")
+        plt.xlabel(xlabel)
+        plt.title(title)
+
 
 class SonifyAccessor:
+    """Accessor to support Data Sonification when linked to another data store object (i.e. Xarray DataArray,
+    Pandas Series)"""
+
     def __init__(self, obj):
         self._obj = obj
+        self._sonify_cache = None
 
     def __call__(
         self, wave="sine", note_length=1.0, smap=None, envelope=None, fs=44100
     ):
         sonify = self._construct_sonify_obj(smap, envelope, fs)
+        self._sonify_cache = sonify
         return sonify.to_audio(wave, note_length)
 
     def _construct_sonify_obj(self, smap, envelope, fs):
-        """TODO:"""
-
-        if self._obj.ndim > 1:
-            raise ValueError("TODO")
+        """Attempts to construct a ``Sonify`` instance from the parent data structure."""
 
         data = self._obj.values
 
         sonify = Sonify(data=data, smap=smap, envelope=envelope, fs=fs)
         return sonify
+
+    def plot(
+        self,
+        x=None,
+        xlabel=None,
+        title=None,
+        figsize=(10, 5),
+        marker="o",
+        linewidth=0,
+        **kwargs,
+    ):
+        if self._sonify_cache is None:
+            raise ValueError("TODO")
+
+        return self._sonify_cache.plot(
+            x, xlabel, title, figsize, marker, linewidth, **kwargs
+        )
