@@ -10,3 +10,5 @@ librosa
 scipy
 pip
 git+https://github.com/philipc2/sci-sonify.git
+netcdf
+matplotlib
