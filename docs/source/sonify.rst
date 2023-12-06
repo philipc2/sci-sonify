@@ -19,7 +19,7 @@ supported functionality.
 
 ..  code-block:: Python
 
-    soni.to_audio()
+    soni.to_audio(note_length=0.5, wave='sine')
 
 ..  code-block:: Python
 
