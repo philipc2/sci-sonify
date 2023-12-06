@@ -2,6 +2,9 @@
 
 -----------------
 
+[![Documentation Status](https://readthedocs.org/projects/sci-sonify/badge/?version=latest)](https://sci-sonify.readthedocs.io/en/latest/?badge=latest)
+
+
 # Turning Scientific Data into Sounds & Music
 
 ## What is it?
