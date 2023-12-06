@@ -13,7 +13,6 @@ Sci-Sonify provides accessors for ``xarray.DataArray`` and ``pandas.Series`` cla
     import scisonify.xarray
 
     da = xr.DataArray([1, 2, 3])
-
     da.sonify()
 
 ..  code-block:: Python
