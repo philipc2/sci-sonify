@@ -17,7 +17,7 @@ classifiers = [
   "Topic :: Scientific/Engineering",
 ]
 description = "Turn Scientific Data into Sounds & Music"
-dynamic = ["version"]
+version = "1.0.0
 name = "scisonify"
 readme = "README.md"
 requires-python = ">=3.9"
