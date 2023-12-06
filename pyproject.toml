@@ -16,7 +16,7 @@ classifiers = [
   "Programming Language :: Python :: 3.11",
   "Topic :: Scientific/Engineering",
 ]
-description = "Sonification of Scientific Data in Python"
+description = "Turn Scientific Data into Sounds & Music"
 dynamic = ["version"]
 name = "scisonify"
 readme = "README.md"
