@@ -11,8 +11,6 @@ Sci-Sonify is a Python package that enables simple and straightforward data soni
 ## Soundmaps
 Instead of using colors (i.e. colormaps) for visualuzing data, Sci-Sonify introduces the concept of "soundmaps", which allow for mapping quantitative data to a range of musical notes.
 
-TODO: add a visual comparing "colormaps" to "soundmaps"
-
 ## Accessors
 In addition to providing standalone functionality for working with lists and arrays, Sci-Sonify introduces accessors into commonly used packages in the Scientific Python Ecosystem.
 
