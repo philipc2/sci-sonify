@@ -208,7 +208,9 @@ class SonifyAccessor:
     ):
         """Plots each data point in terms of its Musical Note representation"""
         if self._sonify_cache is None:
-            raise ValueError("TODO")
+            raise ValueError(
+                "Plotting requires at least one successfully run. Did you forget to sonfiy your data?"
+            )
 
         return self._sonify_cache.plot(
             x, xlabel, title, figsize, marker, linewidth, **kwargs
