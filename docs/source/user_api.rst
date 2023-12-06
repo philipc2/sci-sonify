@@ -29,21 +29,21 @@ Soundmaps
 .. autosummary::
    :toctree: _autosummary
 
-   SoundMap
-   DiscreteNoteBins
+   scisonify.core.soundmaps.SoundMap
+   scisonify.core.soundmaps.DiscreteNoteBins
 
 Waveforms
 ---------
 .. autosummary::
    :toctree: _autosummary
 
-   sine_wave
-   square_wave
-   sawtooth_wave
+   scisonify.core.waveforms.sine_wave
+   scisonify.core.waveforms.square_wave
+   scisonify.core.waveforms.sawtooth_wave
 
 Envelopes
 ---------
 .. autosummary::
    :toctree: _autosummary
 
-   EnvelopeADSR
+   scisonify.core.envelope.EnvelopeADSR
