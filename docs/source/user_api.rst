@@ -1,3 +1,5 @@
+.. currentmodule:: scisonify
+
 User Api
 ========
 
