@@ -13,19 +13,18 @@ from .envelope import EnvelopeADSR
 class Sonify:
     """Class for performing Data Sonification.
 
-    Turns a 1-dimensions array-like data variable into musical notes.
+    Turns a 1-dimensional array-like data variable into musical notes.
 
     Parameters
     ----------
-
-    data: array-like
-        todo
+    data: array-like, required
+        1-D data variable to perform data sonification on
     smap: SoundMap, optional
-        todo
+        SoundMap for mapping data to musical notes
     envelope: EnvelopeADSR, optional
-        todo
+        Envelope to apply to each note
     fs: int, optional
-        todo
+        Sampling Frequency
 
     """
 
@@ -51,7 +50,18 @@ class Sonify:
             self.smap = smap
 
     def _normalize_data(self, data):
-        """Normalizes a one-dimensional array-like data variable into the range [0, 1]"""
+        """Normalizes a one-dimensional array-like data variable into the range [0, 1]
+
+        Parameters
+        ----------
+        data: array-like
+            1-D array-like data variable to normalize
+
+        Returns
+        -------
+        data_norm: np.ndarray
+            1-D normalized data variable
+        """
         data = np.asarray(data)
         if data.ndim > 1:
             raise ValueError(
@@ -70,6 +80,20 @@ class Sonify:
         return data_norm
 
     def to_waveform(self, wave="sine", note_length=1.0):
+        """Converts a normalized data variable into a waveform.
+
+        Parameters
+        ----------
+        wave: optional, str
+            Wave to use for oscillator, one of ['sine', 'square', 'sawtooth']
+
+        Returns
+        -------
+        waveform: np.ndarray
+            An array of length int(note_length * self.fs) * len(self._data) containing len(self._data) of duration
+            note_length computed using the provided wave.
+
+        """
         if wave == "sine":
             _wave = sine_wave
         elif wave == "square":
@@ -77,7 +101,9 @@ class Sonify:
         elif wave == "sawtooth":
             _wave = sawtooth_wave
         else:
-            raise ValueError("TODO")
+            raise ValueError(
+                f"Invalid wave {wave}:, expected one of 'sine', 'square', or 'sawtooth"
+            )
 
         # empty array to store waveform
         waveform = np.empty(int(note_length * self.fs) * len(self._data))
@@ -109,11 +135,11 @@ class Sonify:
         return Audio(waveform, rate=self.fs)
 
     def to_notes(self):
-        """TODO:"""
+        """Each data point represented as a Musical Note computed using the stored SoundMap"""
         return [self.smap.get_note(val) for val in self._data]
 
     def to_frequencies(self):
-        """Converts each data point into a frequency using a SoundMap"""
+        """Each data point represented as a frequency (hz) computed using the stored SoundMap"""
         freqs = [self.smap.get_frequency(val) for val in self._data]
         return freqs
 
@@ -127,6 +153,7 @@ class Sonify:
         linewidth=0,
         **kwargs,
     ):
+        """Plots each data point in terms of its Musical Note representation"""
         import matplotlib.pyplot as plt
 
         plt.figure(figsize=figsize)
@@ -179,6 +206,7 @@ class SonifyAccessor:
         linewidth=0,
         **kwargs,
     ):
+        """Plots each data point in terms of its Musical Note representation"""
         if self._sonify_cache is None:
             raise ValueError("TODO")
 
