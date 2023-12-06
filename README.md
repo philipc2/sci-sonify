@@ -3,6 +3,8 @@
 -----------------
 
 [![Documentation Status](https://readthedocs.org/projects/sci-sonify/badge/?version=latest)](https://sci-sonify.readthedocs.io/en/latest/?badge=latest)
+[![Available on pypi](https://img.shields.io/pypi/v/scisonify.svg)](https://pypi.python.org/pypi/scisonify/)
+
 
 
 # Turning Scientific Data into Sounds & Music
