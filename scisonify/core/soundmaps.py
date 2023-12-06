@@ -114,6 +114,10 @@ class DiscreteNoteBins(SoundMap):
     def get_note(self, value):
         """Maps a normalized data point to its musical note"""
         note_idx = np.searchsorted(self._bins, value, side="left") - 1
+
+        if note_idx == len(self._notes):
+            note_idx = -1
+
         return self._notes[note_idx]
 
     @property
