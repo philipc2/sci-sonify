@@ -9,7 +9,7 @@ class SoundMap:
 
 
 class DiscreteNoteBins(SoundMap):
-    # todo, make inherit from SoundMap
+    """Maps normalized data points to a discrete set of musical notes."""
 
     def __init__(self, notes):
         self._notes = notes
