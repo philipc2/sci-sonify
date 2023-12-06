@@ -45,4 +45,6 @@ s.sonify()
 
 Sci-Sonify can be installed on Linux, Windows, or Mac with `pip`
 
-``pip install scisonify``
+```Python
+pip install scisonify
+```
