@@ -22,3 +22,28 @@ Sonify Accessor
 
    SonifyAccessor
    SonifyAccessor.plot
+
+
+Soundmaps
+---------
+.. autosummary::
+   :toctree: _autosummary
+
+   SoundMap
+   DiscreteNoteBins
+
+Waveforms
+---------
+.. autosummary::
+   :toctree: _autosummary
+
+   sine_wave
+   square_wave
+   sawtooth_wave
+
+Envelopes
+---------
+.. autosummary::
+   :toctree: _autosummary
+
+   EnvelopeADSR
