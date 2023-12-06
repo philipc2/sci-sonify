@@ -1,6 +1,7 @@
 Installation
 ============
 
-.. note::
+Sci-Sonify can be installed using ``pip``
 
-   Todo
+..  code-block:: <Python>
+    pip install scisonify

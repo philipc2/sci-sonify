@@ -1,11 +1,7 @@
 Sci-Sonify
 ==========
 
-Turning Scientific Data into Sounds & Music
-
-.. note::
-
-   This project is under active development.
+Turn Scientific Data into Sounds & Music
 
 Contents
 --------
@@ -15,8 +11,6 @@ Contents
    :maxdepth: 1
    :caption: Getting Started
 
-
-   overview.rst
    install.rst
 
 .. toctree::
