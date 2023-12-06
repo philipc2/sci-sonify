@@ -19,4 +19,4 @@ Sonify Accessor
    :toctree: _autosummary
 
    SonifyAccessor
-   SonifyAccessor.plot()
+   SonifyAccessor.plot
