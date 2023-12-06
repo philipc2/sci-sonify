@@ -1,4 +1,4 @@
-<img src="docs/source/_static/logo.svg" data-canonical-src="docs/source/_static/logo.svg" width="400"/><br>
+<img src="https://raw.githubusercontent.com/philipc2/sci-sonify/46e55b0a794753375dd0c0f8acf5f2ed7901210a/docs/source/_static/logo.svg" width="400"/><br>
 
 -----------------
 
